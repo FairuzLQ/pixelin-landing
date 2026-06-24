@@ -1,15 +1,15 @@
-import { getAdminSession } from "@/lib/auth";
-import { readContent } from "@/lib/content";
-import AdminDashboard from "./AdminDashboard";
 import LoginPage from "./LoginPage";
-
-export const dynamic = "force-dynamic";
+import AdminDashboard from "./AdminDashboard";
 
 export default async function AdminPage() {
-  const authed = await getAdminSession();
-
-  if (!authed) return <LoginPage />;
-
-  const content = readContent();
-  return <AdminDashboard initialContent={content} />;
+  try {
+    const { getAdminSession } = await import("@/lib/auth");
+    const authed = await getAdminSession();
+    if (!authed) return <LoginPage />;
+    const { readContent } = await import("@/lib/content");
+    const content = readContent();
+    return <AdminDashboard initialContent={content} />;
+  } catch {
+    return <LoginPage />;
+  }
 }

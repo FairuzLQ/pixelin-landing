@@ -8,13 +8,11 @@ import PixelGameSection from "@/components/sections/PixelGameSection";
 import ContactSection from "@/components/sections/ContactSection";
 import FooterSection from "@/components/sections/FooterSection";
 
-export const dynamic = "force-dynamic";
-
 export default function Home() {
   const content = readContent();
 
   return (
-    <main className="min-h-screen bg-[#050508]">
+    <main className="min-h-screen bg-[#050508] overflow-x-hidden">
       <Navbar />
       <HeroSection content={content.hero} />
       <ServicesSection content={content.services} />

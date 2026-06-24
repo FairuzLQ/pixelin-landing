@@ -1,4 +1,6 @@
 import { NextResponse } from "next/server";
+
+export const dynamic = "force-static";
 import { COOKIE } from "@/lib/auth";
 
 export async function POST() {

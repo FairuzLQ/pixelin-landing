@@ -1,4 +1,6 @@
 import { NextResponse } from "next/server";
+
+export const dynamic = "force-static";
 import bcrypt from "bcryptjs";
 import { signToken, COOKIE } from "@/lib/auth";
 

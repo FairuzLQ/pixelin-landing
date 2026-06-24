@@ -1,4 +1,6 @@
 import { NextResponse } from "next/server";
+
+export const dynamic = "force-static";
 import { getAdminSession } from "@/lib/auth";
 import { readContent, writeContent } from "@/lib/content";
 import type { SiteContent } from "@/types/content";

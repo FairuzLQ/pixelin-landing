@@ -1,11 +1,20 @@
 {
   "hero": {
-    "badge": "Web Agency — Indonesia",
+    "badge": "Web Agency - Indonesia",
     "subheadline": "Pixelin mengubah ide bisnis jadi website yang bekerja — cepat, clean, dan tepat sasaran. Tanpa ribet, tanpa biaya tersembunyi.",
     "stats": [
-      { "value": "10+", "label": "Proyek selesai" },
-      { "value": "< 2wk", "label": "Rata-rata deliver" },
-      { "value": "100%", "label": "Klien puas" }
+      {
+        "value": "10+",
+        "label": "Proyek selesai"
+      },
+      {
+        "value": "< 2wk",
+        "label": "Rata-rata deliver"
+      },
+      {
+        "value": "100%",
+        "label": "Klien puas"
+      }
     ],
     "cta1": "Mulai Proyek",
     "cta2": "Lihat Karya Kami"
@@ -16,10 +25,26 @@
     "headline2": "dari satu tempat",
     "subheadline": "Kami tidak menawarkan semua hal. Kami fokus pada apa yang benar-benar menggerakkan bisnis digital Anda.",
     "items": [
-      { "title": "Landing Page", "desc": "Satu halaman, satu tujuan. Kami bikin halaman yang fokus konversi — cocok buat campaign, produk launch, atau jasa spesifik.", "tag": "Paling populer" },
-      { "title": "Company Profile", "desc": "Website yang merepresentasikan bisnis Anda secara profesional. Lengkap, informatif, dan bikin kesan pertama yang kuat.", "tag": null },
-      { "title": "E-Commerce", "desc": "Toko online siap jualan. Manajemen produk, checkout, dan payment gateway — semuanya kami setup dan konfigurasi.", "tag": null },
-      { "title": "Custom Web App", "desc": "Butuh sesuatu yang lebih spesifik? Sistem dashboard, booking, direktori — kami bangun sesuai kebutuhan bisnis Anda.", "tag": null }
+      {
+        "title": "Landing Page",
+        "desc": "Satu halaman, satu tujuan. Kami bikin halaman yang fokus konversi — cocok buat campaign, produk launch, atau jasa spesifik.",
+        "tag": "Paling populer"
+      },
+      {
+        "title": "Company Profile",
+        "desc": "Website yang merepresentasikan bisnis Anda secara profesional. Lengkap, informatif, dan bikin kesan pertama yang kuat.",
+        "tag": null
+      },
+      {
+        "title": "E-Commerce",
+        "desc": "Toko online siap jualan. Manajemen produk, checkout, dan payment gateway — semuanya kami setup dan konfigurasi.",
+        "tag": null
+      },
+      {
+        "title": "Custom Web App",
+        "desc": "Butuh sesuatu yang lebih spesifik? Sistem dashboard, booking, direktori — kami bangun sesuai kebutuhan bisnis Anda.",
+        "tag": null
+      }
     ]
   },
   "why": {
@@ -28,12 +53,30 @@
     "headline2": "bukan yang lain?",
     "subheadline": "Bukan karena kami yang terbaik di dunia. Tapi karena kami yang paling masuk akal untuk kebutuhan Anda.",
     "items": [
-      { "title": "Cepat tanpa drama", "desc": "Estimasi waktu yang realistis dan kami pegang. Rata-rata 1–2 minggu dari brief ke live." },
-      { "title": "Komunikasi yang jelas", "desc": "Tidak perlu pusing dengan jargon teknis. Update progress selalu transparan dan mudah dipahami." },
-      { "title": "Mobile-first by default", "desc": "Lebih dari 70% traffic datang dari HP. Semua yang kami buat terlihat bagus di layar apapun." },
-      { "title": "Performance dari awal", "desc": "Bukan sekadar cantik — website kami dirancang untuk cepat load dan ramah Google Search." },
-      { "title": "Harga fix, tidak ada kejutan", "desc": "Scope yang disepakati di awal adalah yang dikerjakan. Tidak ada biaya tambahan yang tidak dibahas." },
-      { "title": "Orientasi hasil", "desc": "Kami lihat website bukan sebagai proyek desain, tapi sebagai alat bisnis yang harus performan." }
+      {
+        "title": "Cepat tanpa drama",
+        "desc": "Estimasi waktu yang realistis dan kami pegang. Rata-rata 1–2 minggu dari brief ke live."
+      },
+      {
+        "title": "Komunikasi yang jelas",
+        "desc": "Tidak perlu pusing dengan jargon teknis. Update progress selalu transparan dan mudah dipahami."
+      },
+      {
+        "title": "Mobile-first by default",
+        "desc": "Lebih dari 70% traffic datang dari HP. Semua yang kami buat terlihat bagus di layar apapun."
+      },
+      {
+        "title": "Performance dari awal",
+        "desc": "Bukan sekadar cantik — website kami dirancang untuk cepat load dan ramah Google Search."
+      },
+      {
+        "title": "Harga fix, tidak ada kejutan",
+        "desc": "Scope yang disepakati di awal adalah yang dikerjakan. Tidak ada biaya tambahan yang tidak dibahas."
+      },
+      {
+        "title": "Orientasi hasil",
+        "desc": "Kami lihat website bukan sebagai proyek desain, tapi sebagai alat bisnis yang harus performan."
+      }
     ]
   },
   "contact": {
@@ -41,6 +84,10 @@
     "subheadline": "Cerita ke kami.",
     "body": "Tidak perlu proposal panjang. Ceritakan singkat apa yang Anda butuhkan — kami balas dalam 24 jam dengan estimasi dan langkah selanjutnya.",
     "whatsapp": "6281290391717",
-    "reassurances": ["Respon dalam 24 jam", "Konsultasi gratis", "Tidak ada pressure"]
+    "reassurances": [
+      "Respon dalam 24 jam",
+      "Konsultasi gratis",
+      "Tidak ada pressure"
+    ]
   }
 }
