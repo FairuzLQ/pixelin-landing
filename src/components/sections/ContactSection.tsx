@@ -1,9 +1,13 @@
 "use client";
 
+import { useState } from "react";
 import { motion } from "framer-motion";
-import { MessageCircle, Mail, ArrowRight } from "lucide-react";
+import { MessageCircle, Mail } from "lucide-react";
+import ContactModal from "./ContactModal";
 
 export default function ContactSection() {
+  const [modalOpen, setModalOpen] = useState(false);
+
   return (
     <section id="contact" className="py-28 px-6 relative overflow-hidden">
       {/* BG */}
@@ -46,23 +50,22 @@ export default function ContactSection() {
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <button
+              onClick={() => setModalOpen(true)}
+              className="group w-full sm:w-auto flex items-center justify-center gap-2.5 px-7 py-3.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-semibold text-sm transition-all duration-200 hover:shadow-xl hover:shadow-indigo-500/25 hover:-translate-y-0.5"
+            >
+              <Mail size={17} />
+              Kirim Pesan
+            </button>
+
             <a
               href="https://wa.me/6281234567890?text=Halo%20Pixelin%2C%20saya%20ingin%20konsultasi%20website"
               target="_blank"
               rel="noopener noreferrer"
-              className="group w-full sm:w-auto flex items-center justify-center gap-2.5 px-7 py-3.5 rounded-xl bg-[#25D366] hover:bg-[#20bd5a] text-white font-semibold text-sm transition-all duration-200 hover:shadow-xl hover:shadow-green-500/25 hover:-translate-y-0.5"
+              className="group w-full sm:w-auto flex items-center justify-center gap-2.5 px-7 py-3.5 rounded-xl border border-slate-700 hover:border-green-500/60 text-slate-300 hover:text-white font-semibold text-sm transition-all duration-200"
             >
               <MessageCircle size={17} />
               Chat via WhatsApp
-              <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
-            </a>
-
-            <a
-              href="mailto:hello@pixelin.id"
-              className="group w-full sm:w-auto flex items-center justify-center gap-2.5 px-7 py-3.5 rounded-xl border border-slate-700 hover:border-indigo-500/60 text-slate-300 hover:text-white font-semibold text-sm transition-all duration-200"
-            >
-              <Mail size={17} />
-              hello@pixelin.id
             </a>
           </div>
 
@@ -77,6 +80,7 @@ export default function ContactSection() {
           </div>
         </motion.div>
       </div>
+      <ContactModal open={modalOpen} onClose={() => setModalOpen(false)} />
     </section>
   );
 }

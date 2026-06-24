@@ -9,6 +9,11 @@ export const metadata: Metadata = {
   title: "Pixelin — We Build Websites That Work",
   description: "Pixelin adalah agensi web yang membangun website profesional, cepat, dan efektif untuk bisnis Anda. Landing page, company profile, e-commerce — kami kerjakan.",
   keywords: ["website agency", "jasa website", "landing page", "web development", "pixelin"],
+  icons: {
+    icon: [{ url: "/favicon.svg", type: "image/svg+xml" }],
+    shortcut: "/favicon.svg",
+    apple: "/favicon.svg",
+  },
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
