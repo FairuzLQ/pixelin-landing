@@ -1,3 +1,4 @@
+import { readContent } from "@/lib/content";
 import Navbar from "@/components/sections/Navbar";
 import HeroSection from "@/components/sections/HeroSection";
 import ServicesSection from "@/components/sections/ServicesSection";
@@ -7,16 +8,20 @@ import PixelGameSection from "@/components/sections/PixelGameSection";
 import ContactSection from "@/components/sections/ContactSection";
 import FooterSection from "@/components/sections/FooterSection";
 
+export const dynamic = "force-dynamic";
+
 export default function Home() {
+  const content = readContent();
+
   return (
     <main className="min-h-screen bg-[#050508]">
       <Navbar />
-      <HeroSection />
-      <ServicesSection />
+      <HeroSection content={content.hero} />
+      <ServicesSection content={content.services} />
       <WorkSection />
-      <WhySection />
+      <WhySection content={content.why} />
       <PixelGameSection />
-      <ContactSection />
+      <ContactSection content={content.contact} />
       <FooterSection />
     </main>
   );

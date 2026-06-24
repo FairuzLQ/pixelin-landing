@@ -2,47 +2,33 @@
 
 import { motion } from "framer-motion";
 import { Rocket, MessageSquare, Smartphone, Lock, Clock, TrendingUp } from "lucide-react";
+import type { WhyContent } from "@/types/content";
 
-const reasons = [
-  {
-    icon: Clock,
-    title: "Cepat tanpa drama",
-    desc: "Estimasi waktu yang realistis dan kami pegang. Rata-rata 1–2 minggu dari brief ke live.",
-    accent: "#22d3ee",
-  },
-  {
-    icon: MessageSquare,
-    title: "Komunikasi yang jelas",
-    desc: "Tidak perlu pusing dengan jargon teknis. Update progress selalu transparan dan mudah dipahami.",
-    accent: "#a78bfa",
-  },
-  {
-    icon: Smartphone,
-    title: "Mobile-first by default",
-    desc: "Lebih dari 70% traffic datang dari HP. Semua yang kami buat terlihat bagus di layar apapun.",
-    accent: "#34d399",
-  },
-  {
-    icon: Rocket,
-    title: "Performance dari awal",
-    desc: "Bukan sekadar cantik — website kami dirancang untuk cepat load dan ramah Google Search.",
-    accent: "#f59e0b",
-  },
-  {
-    icon: Lock,
-    title: "Harga fix, tidak ada kejutan",
-    desc: "Scope yang disepakati di awal adalah yang dikerjakan. Tidak ada biaya tambahan yang tidak dibahas.",
-    accent: "#6366f1",
-  },
-  {
-    icon: TrendingUp,
-    title: "Orientasi hasil",
-    desc: "Kami lihat website bukan sebagai proyek desain, tapi sebagai alat bisnis yang harus performan.",
-    accent: "#f472b6",
-  },
+const ICONS = [
+  { icon: Clock,         accent: "#22d3ee" },
+  { icon: MessageSquare, accent: "#a78bfa" },
+  { icon: Smartphone,    accent: "#34d399" },
+  { icon: Rocket,        accent: "#f59e0b" },
+  { icon: Lock,          accent: "#6366f1" },
+  { icon: TrendingUp,    accent: "#f472b6" },
 ];
 
-export default function WhySection() {
+const DEFAULT_ITEMS = [
+  { title: "Cepat tanpa drama", desc: "Estimasi waktu yang realistis dan kami pegang. Rata-rata 1–2 minggu dari brief ke live." },
+  { title: "Komunikasi yang jelas", desc: "Tidak perlu pusing dengan jargon teknis. Update progress selalu transparan dan mudah dipahami." },
+  { title: "Mobile-first by default", desc: "Lebih dari 70% traffic datang dari HP. Semua yang kami buat terlihat bagus di layar apapun." },
+  { title: "Performance dari awal", desc: "Bukan sekadar cantik — website kami dirancang untuk cepat load dan ramah Google Search." },
+  { title: "Harga fix, tidak ada kejutan", desc: "Scope yang disepakati di awal adalah yang dikerjakan. Tidak ada biaya tambahan yang tidak dibahas." },
+  { title: "Orientasi hasil", desc: "Kami lihat website bukan sebagai proyek desain, tapi sebagai alat bisnis yang harus performan." },
+];
+
+export default function WhySection({ content }: { content?: WhyContent }) {
+  const badge = content?.badge ?? "Why Pixelin";
+  const headline = content?.headline ?? "Kenapa pilih kami";
+  const headline2 = content?.headline2 ?? "bukan yang lain?";
+  const subheadline = content?.subheadline ?? "Bukan karena kami yang terbaik di dunia. Tapi karena kami yang paling masuk akal untuk kebutuhan Anda.";
+  const items = content?.items ?? DEFAULT_ITEMS;
+
   return (
     <section id="why" className="py-28 px-6 relative overflow-hidden">
       {/* Side glow */}
@@ -60,21 +46,22 @@ export default function WhySection() {
         >
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-purple-500/25 bg-purple-500/8 text-purple-300 text-xs font-semibold mb-4 uppercase tracking-wider">
             <span className="w-1.5 h-1.5 rounded-full bg-purple-400 animate-pulse" />
-            Why Pixelin
+            {badge}
           </div>
           <h2 className="text-4xl md:text-5xl font-black tracking-tight mb-4">
-            Kenapa pilih kami
+            {headline}
             <br />
-            <span className="gradient-text">bukan yang lain?</span>
+            <span className="gradient-text">{headline2}</span>
           </h2>
-          <p className="text-slate-400 max-w-xl mx-auto text-base">
-            Bukan karena kami yang terbaik di dunia. Tapi karena kami yang paling masuk akal untuk kebutuhan Anda.
-          </p>
+          <p className="text-slate-400 max-w-xl mx-auto text-base">{subheadline}</p>
         </motion.div>
 
         {/* Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-          {reasons.map((r, i) => (
+          {items.map((item, i) => {
+            const { icon: Icon, accent } = ICONS[i % ICONS.length];
+            const r = { ...item, icon: Icon, accent };
+            return (
             <motion.div
               key={r.title}
               initial={{ opacity: 0, y: 24 }}
@@ -98,7 +85,8 @@ export default function WhySection() {
                 <p className="text-slate-400 text-sm leading-relaxed">{r.desc}</p>
               </div>
             </motion.div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>

@@ -4,9 +4,16 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { MessageCircle, Mail } from "lucide-react";
 import ContactModal from "./ContactModal";
+import type { ContactContent } from "@/types/content";
 
-export default function ContactSection() {
+export default function ContactSection({ content }: { content?: ContactContent }) {
   const [modalOpen, setModalOpen] = useState(false);
+
+  const headline = content?.headline ?? "Ada proyek?";
+  const subheadline = content?.subheadline ?? "Cerita ke kami.";
+  const body = content?.body ?? "Tidak perlu proposal panjang. Ceritakan singkat apa yang Anda butuhkan — kami balas dalam 24 jam dengan estimasi dan langkah selanjutnya.";
+  const whatsapp = content?.whatsapp ?? "6281290391717";
+  const reassurances = content?.reassurances ?? ["Respon dalam 24 jam", "Konsultasi gratis", "Tidak ada pressure"];
 
   return (
     <section id="contact" className="py-28 px-6 relative overflow-hidden">
@@ -39,14 +46,13 @@ export default function ContactSection() {
           </div>
 
           <h2 className="text-4xl md:text-5xl font-black tracking-tight mb-4">
-            Ada proyek?
+            {headline}
             <br />
-            <span className="gradient-text">Cerita ke kami.</span>
+            <span className="gradient-text">{subheadline}</span>
           </h2>
 
           <p className="text-slate-400 text-base max-w-lg mx-auto mb-10 leading-relaxed">
-            Tidak perlu proposal panjang. Ceritakan singkat apa yang Anda butuhkan —
-            kami balas dalam 24 jam dengan estimasi dan langkah selanjutnya.
+            {body}
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -59,7 +65,7 @@ export default function ContactSection() {
             </button>
 
             <a
-              href="https://wa.me/6281290391717?text=Halo%20Pixelin%2C%20saya%20ingin%20konsultasi%20website"
+              href={`https://wa.me/${whatsapp}?text=Halo%20Pixelin%2C%20saya%20ingin%20konsultasi%20website`}
               target="_blank"
               rel="noopener noreferrer"
               className="group w-full sm:w-auto flex items-center justify-center gap-2.5 px-7 py-3.5 rounded-xl border border-slate-700 hover:border-green-500/60 text-slate-300 hover:text-white font-semibold text-sm transition-all duration-200"
@@ -71,7 +77,7 @@ export default function ContactSection() {
 
           {/* Reassurance */}
           <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-5 text-xs text-slate-600">
-            {["Respon dalam 24 jam", "Konsultasi gratis", "Tidak ada pressure"].map((t) => (
+            {reassurances.map((t) => (
               <div key={t} className="flex items-center gap-1.5">
                 <span className="w-1 h-1 rounded-full bg-indigo-500" />
                 {t}

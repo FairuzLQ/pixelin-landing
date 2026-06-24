@@ -2,47 +2,29 @@
 
 import { motion } from "framer-motion";
 import { Layout, Globe, ShoppingBag, Code2 } from "lucide-react";
+import type { ServicesContent } from "@/types/content";
 
-const services = [
-  {
-    icon: Layout,
-    title: "Landing Page",
-    desc: "Satu halaman, satu tujuan. Kami bikin halaman yang fokus konversi — cocok buat campaign, produk launch, atau jasa spesifik.",
-    tag: "Paling populer",
-    accent: "#6366f1",
-    from: "#6366f1",
-    to: "#818cf8",
-  },
-  {
-    icon: Globe,
-    title: "Company Profile",
-    desc: "Website yang merepresentasikan bisnis Anda secara profesional. Lengkap, informatif, dan bikin kesan pertama yang kuat.",
-    tag: null,
-    accent: "#22d3ee",
-    from: "#22d3ee",
-    to: "#0ea5e9",
-  },
-  {
-    icon: ShoppingBag,
-    title: "E-Commerce",
-    desc: "Toko online siap jualan. Manajemen produk, checkout, dan payment gateway — semuanya kami setup dan konfigurasi.",
-    tag: null,
-    accent: "#a78bfa",
-    from: "#a78bfa",
-    to: "#6366f1",
-  },
-  {
-    icon: Code2,
-    title: "Custom Web App",
-    desc: "Butuh sesuatu yang lebih spesifik? Sistem dashboard, booking, direktori — kami bangun sesuai kebutuhan bisnis Anda.",
-    tag: null,
-    accent: "#34d399",
-    from: "#34d399",
-    to: "#22d3ee",
-  },
+const DESIGN = [
+  { icon: Layout, accent: "#6366f1", from: "#6366f1", to: "#818cf8" },
+  { icon: Globe,  accent: "#22d3ee", from: "#22d3ee", to: "#0ea5e9" },
+  { icon: ShoppingBag, accent: "#a78bfa", from: "#a78bfa", to: "#6366f1" },
+  { icon: Code2,  accent: "#34d399", from: "#34d399", to: "#22d3ee" },
 ];
 
-export default function ServicesSection() {
+const DEFAULT_ITEMS = [
+  { title: "Landing Page", desc: "Satu halaman, satu tujuan. Kami bikin halaman yang fokus konversi — cocok buat campaign, produk launch, atau jasa spesifik.", tag: "Paling populer" },
+  { title: "Company Profile", desc: "Website yang merepresentasikan bisnis Anda secara profesional. Lengkap, informatif, dan bikin kesan pertama yang kuat.", tag: null },
+  { title: "E-Commerce", desc: "Toko online siap jualan. Manajemen produk, checkout, dan payment gateway — semuanya kami setup dan konfigurasi.", tag: null },
+  { title: "Custom Web App", desc: "Butuh sesuatu yang lebih spesifik? Sistem dashboard, booking, direktori — kami bangun sesuai kebutuhan bisnis Anda.", tag: null },
+];
+
+export default function ServicesSection({ content }: { content?: ServicesContent }) {
+  const badge = content?.badge ?? "What We Do";
+  const headline = content?.headline ?? "Semua yang bisnis Anda butuhkan";
+  const headline2 = content?.headline2 ?? "dari satu tempat";
+  const subheadline = content?.subheadline ?? "Kami tidak menawarkan semua hal. Kami fokus pada apa yang benar-benar menggerakkan bisnis digital Anda.";
+  const items = content?.items ?? DEFAULT_ITEMS;
+
   return (
     <section id="services" className="py-28 px-6 relative">
       <div className="max-w-6xl mx-auto">
@@ -56,20 +38,20 @@ export default function ServicesSection() {
         >
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-cyan-500/25 bg-cyan-500/8 text-cyan-400 text-xs font-semibold mb-4 uppercase tracking-wider">
             <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" />
-            What We Do
+            {badge}
           </div>
           <h2 className="text-4xl md:text-5xl font-black tracking-tight mb-4">
-            Semua yang bisnis Anda butuhkan<br />
-            <span className="gradient-text">dari satu tempat</span>
+            {headline}<br />
+            <span className="gradient-text">{headline2}</span>
           </h2>
-          <p className="text-slate-400 max-w-xl mx-auto text-base">
-            Kami tidak menawarkan semua hal. Kami fokus pada apa yang benar-benar menggerakkan bisnis digital Anda.
-          </p>
+          <p className="text-slate-400 max-w-xl mx-auto text-base">{subheadline}</p>
         </motion.div>
 
         {/* Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-          {services.map((s, i) => (
+          {items.map((item, i) => {
+            const s = { ...DESIGN[i % DESIGN.length], ...item };
+            return (
             <motion.div
               key={s.title}
               initial={{ opacity: 0, y: 30 }}
@@ -116,7 +98,8 @@ export default function ServicesSection() {
                 />
               </div>
             </motion.div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>

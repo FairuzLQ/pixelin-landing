@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { ArrowRight, Zap } from "lucide-react";
+import type { HeroContent } from "@/types/content";
 
 const phrases = ["Website.", "Landing Page.", "Company Profile.", "E-Commerce.", "Digital Presence."];
 
@@ -37,7 +38,13 @@ function TypewriterText() {
   );
 }
 
-export default function HeroSection() {
+export default function HeroSection({ content }: { content?: HeroContent }) {
+  const badge = content?.badge ?? "Web Agency — Indonesia";
+  const subheadline = content?.subheadline ?? "Pixelin mengubah ide bisnis jadi website yang bekerja — cepat, clean, dan tepat sasaran. Tanpa ribet, tanpa biaya tersembunyi.";
+  const stats = content?.stats ?? [{ value: "10+", label: "Proyek selesai" }, { value: "< 2wk", label: "Rata-rata deliver" }, { value: "100%", label: "Klien puas" }];
+  const cta1 = content?.cta1 ?? "Mulai Proyek";
+  const cta2 = content?.cta2 ?? "Lihat Karya Kami";
+
   return (
     <section className="relative min-h-screen flex items-center justify-center pixel-grid-bg overflow-hidden">
       {/* Radial glow blobs */}
@@ -56,7 +63,7 @@ export default function HeroSection() {
           className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-indigo-500/30 bg-indigo-500/10 text-indigo-300 text-xs font-semibold mb-8 tracking-wider uppercase"
         >
           <Zap size={11} className="fill-current" />
-          Web Agency — Indonesia
+          {badge}
         </motion.div>
 
         {/* Headline */}
@@ -78,8 +85,7 @@ export default function HeroSection() {
           transition={{ duration: 0.6, delay: 0.25 }}
           className="text-slate-400 text-lg md:text-xl max-w-2xl mx-auto mb-10 leading-relaxed"
         >
-          Pixelin mengubah ide bisnis jadi website yang bekerja — cepat, clean, dan tepat sasaran.
-          Tanpa ribet, tanpa biaya tersembunyi.
+          {subheadline}
         </motion.p>
 
         {/* CTAs */}
@@ -93,14 +99,14 @@ export default function HeroSection() {
             href="#contact"
             className="group flex items-center gap-2 px-6 py-3.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-semibold text-sm transition-all duration-200 hover:shadow-xl hover:shadow-indigo-500/30 hover:-translate-y-0.5"
           >
-            Mulai Proyek
+            {cta1}
             <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
           </a>
           <a
             href="#work"
             className="flex items-center gap-2 px-6 py-3.5 rounded-xl border border-slate-700 hover:border-slate-500 text-slate-300 hover:text-white font-semibold text-sm transition-all duration-200"
           >
-            Lihat Karya Kami
+            {cta2}
           </a>
         </motion.div>
 
@@ -111,11 +117,7 @@ export default function HeroSection() {
           transition={{ duration: 0.8, delay: 0.6 }}
           className="mt-20 grid grid-cols-3 gap-8 max-w-lg mx-auto"
         >
-          {[
-            { value: "10+", label: "Proyek selesai" },
-            { value: "< 2wk", label: "Rata-rata deliver" },
-            { value: "100%", label: "Klien puas" },
-          ].map((stat) => (
+          {stats.map((stat) => (
             <div key={stat.label} className="text-center">
               <div className="text-2xl font-black gradient-text">{stat.value}</div>
               <div className="text-xs text-slate-500 mt-1">{stat.label}</div>
