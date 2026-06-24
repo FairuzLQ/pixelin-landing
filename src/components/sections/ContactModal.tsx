@@ -237,7 +237,7 @@ export default function ContactModal({ open, onClose }: Props) {
                     <p className="text-center text-xs text-slate-600">
                       Atau langsung WhatsApp{" "}
                       <a
-                        href="https://wa.me/6281234567890"
+                        href="https://wa.me/6281290391717"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="text-indigo-400 hover:text-indigo-300 underline underline-offset-2"

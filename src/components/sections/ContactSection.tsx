@@ -59,7 +59,7 @@ export default function ContactSection() {
             </button>
 
             <a
-              href="https://wa.me/6281234567890?text=Halo%20Pixelin%2C%20saya%20ingin%20konsultasi%20website"
+              href="https://wa.me/6281290391717?text=Halo%20Pixelin%2C%20saya%20ingin%20konsultasi%20website"
               target="_blank"
               rel="noopener noreferrer"
               className="group w-full sm:w-auto flex items-center justify-center gap-2.5 px-7 py-3.5 rounded-xl border border-slate-700 hover:border-green-500/60 text-slate-300 hover:text-white font-semibold text-sm transition-all duration-200"
