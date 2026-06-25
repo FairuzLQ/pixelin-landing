@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import { ArrowRight, Zap } from "lucide-react";
 import type { HeroContent } from "@/types/content";
 
-const phrases = ["Website.", "Landing Page.", "Company Profile.", "E-Commerce.", "Digital Presence."];
+const phrases = ["Website.", "Dream.", "Vision.", "Brand.", "Story.", "Future."];
 
 function TypewriterText() {
   const [phraseIndex, setPhraseIndex] = useState(0);
