@@ -18,7 +18,6 @@ export default function ContactModal({ open, onClose }: Props) {
   const [status, setStatus] = useState<Status>("idle");
   const [errorMsg, setErrorMsg] = useState("");
   const honeypotRef = useRef<HTMLInputElement>(null);
-  const firstInputRef = useRef<HTMLInputElement>(null);
 
   // Close on Escape
   useEffect(() => {
@@ -90,7 +89,7 @@ export default function ContactModal({ open, onClose }: Props) {
         email={email} setEmail={setEmail}
         message={message} setMessage={setMessage}
         status={status} errorMsg={errorMsg}
-        honeypotRef={honeypotRef} firstInputRef={firstInputRef}
+        honeypotRef={honeypotRef}
         onClose={handleClose} onSubmit={handleSubmit}
       />}
     </AnimatePresence>
@@ -101,14 +100,13 @@ export default function ContactModal({ open, onClose }: Props) {
 // this resets backdropEnabled to false on every open, preventing ghost taps.
 function ModalInner({
   name, setName, email, setEmail, message, setMessage,
-  status, errorMsg, honeypotRef, firstInputRef, onClose, onSubmit,
+  status, errorMsg, honeypotRef, onClose, onSubmit,
 }: {
   name: string; setName: (v: string) => void;
   email: string; setEmail: (v: string) => void;
   message: string; setMessage: (v: string) => void;
   status: string; errorMsg: string;
   honeypotRef: React.RefObject<HTMLInputElement | null>;
-  firstInputRef: React.RefObject<HTMLInputElement | null>;
   onClose: () => void;
   onSubmit: (e: { preventDefault(): void }) => void;
 }) {
@@ -116,8 +114,9 @@ function ModalInner({
   const [backdropEnabled, setBackdropEnabled] = useState(false);
 
   useEffect(() => {
+    // No auto-focus — on iOS Safari, focus() triggers keyboard which shrinks the
+    // viewport and shifts position:fixed elements, making the modal appear to vanish.
     const t = setTimeout(() => setBackdropEnabled(true), 450);
-    setTimeout(() => firstInputRef.current?.focus(), 100);
     return () => clearTimeout(t);
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -135,9 +134,9 @@ function ModalInner({
     >
       {/* Modal panel — child of the wrapper, so stopPropagation actually works */}
       <motion.div
-        initial={{ opacity: 0, scale: 0.96, y: 16 }}
-        animate={{ opacity: 1, scale: 1, y: 0 }}
-        exit={{ opacity: 0, scale: 0.96, y: 16 }}
+        initial={{ opacity: 0, y: 16 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: 16 }}
         transition={{ duration: 0.22, ease: "easeOut" }}
         className="w-full max-w-lg bg-[#0d0d14] border border-[#1e1e30] rounded-2xl shadow-2xl relative overflow-hidden"
         onClick={(e) => e.stopPropagation()}
@@ -193,7 +192,6 @@ function ModalInner({
                   Nama <span className="text-rose-400">*</span>
                 </label>
                 <input
-                  ref={firstInputRef}
                   type="text"
                   required
                   value={name}
