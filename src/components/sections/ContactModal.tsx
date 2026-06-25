@@ -19,6 +19,17 @@ export default function ContactModal({ open, onClose }: Props) {
   const [errorMsg, setErrorMsg] = useState("");
   const honeypotRef = useRef<HTMLInputElement>(null);
   const firstInputRef = useRef<HTMLInputElement>(null);
+  // Guard against iOS ghost-tap: backdrop ignores clicks for 400ms after modal opens
+  const backdropReadyRef = useRef(false);
+
+  // Guard against iOS ghost-tap: allow 400ms after open before backdrop responds
+  useEffect(() => {
+    if (open) {
+      backdropReadyRef.current = false;
+      const t = setTimeout(() => { backdropReadyRef.current = true; }, 400);
+      return () => clearTimeout(t);
+    }
+  }, [open]);
 
   // Focus first input when modal opens
   useEffect(() => {
@@ -102,8 +113,8 @@ export default function ContactModal({ open, onClose }: Props) {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
-            className="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm"
-            onClick={handleClose}
+            className="fixed inset-0 z-50 bg-black/75"
+            onClick={() => { if (backdropReadyRef.current) handleClose(); }}
             aria-hidden="true"
           />
 
