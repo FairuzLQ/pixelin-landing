@@ -3,6 +3,7 @@ import Navbar from "@/components/sections/Navbar";
 import HeroSection from "@/components/sections/HeroSection";
 import ServicesSection from "@/components/sections/ServicesSection";
 import WorkSection from "@/components/sections/WorkSection";
+import ProcessSection from "@/components/sections/ProcessSection";
 import WhySection from "@/components/sections/WhySection";
 import PixelGameSection from "@/components/sections/PixelGameSection";
 import ContactSection from "@/components/sections/ContactSection";
@@ -16,6 +17,7 @@ export default function Home() {
       <Navbar />
       <HeroSection content={content.hero} />
       <ServicesSection content={content.services} />
+      <ProcessSection />
       <WorkSection />
       <WhySection content={content.why} />
       <PixelGameSection />
