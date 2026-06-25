@@ -157,6 +157,8 @@ function FloatingPixels() {
             height: p.size,
             backgroundColor: p.color,
             opacity: 0.4,
+            willChange: "transform, opacity",
+            backfaceVisibility: "hidden",
           }}
           animate={{
             y: [0, -12, 0],

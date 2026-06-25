@@ -25,6 +25,12 @@
 html {
   scroll-behavior: smooth;
   overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* CSS containment: tells browser each section is independent — big scroll perf win */
+section {
+  contain: layout style;
 }
 
 body {

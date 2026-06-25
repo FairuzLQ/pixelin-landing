@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /pixeladmin/
+Disallow: /api/
+
+Sitemap: https://pixelin.id/sitemap.xml

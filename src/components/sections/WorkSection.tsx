@@ -1,9 +1,21 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ExternalLink, Car, Building2 } from "lucide-react";
+import { ExternalLink, Car, Building2, Globe } from "lucide-react";
 
 const projects = [
+  {
+    name: "Pixelin Space",
+    url: "https://pixelin.space/",
+    displayUrl: "pixelin.space",
+    desc: "Website chatting anonymous yang elegan dan to the point.",
+    icon: Globe,
+    category: "Web Design",
+    accentColor: "#22d3ee",
+    tags: ["Web Design", "Social Media", "Web Chatting"],
+    mockupBg: "from-cyan-900/20 to-teal-900/10",
+    mockupAccent: "#22d3ee",
+  },
   {
     name: "Jasa Pasang Dashcam Mobil",
     url: "https://jasapasangdashcammobil.com/",
@@ -20,7 +32,7 @@ const projects = [
     name: "Bara Putra",
     url: "https://baraputra.co.id/",
     displayUrl: "baraputra.co.id",
-    desc: "Company profile untuk perusahaan berbasis .co.id. Tampil profesional dan terpercaya untuk segmen B2B.",
+    desc: "Company profile untuk perusahaan dengan tampilan profesional dan terpercaya untuk segmen B2B.",
     icon: Building2,
     category: "Company Profile",
     accentColor: "#6366f1",
