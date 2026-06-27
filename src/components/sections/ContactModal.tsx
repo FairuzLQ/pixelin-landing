@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
+import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, Send, CheckCircle, AlertCircle, Loader2 } from "lucide-react";
 
@@ -18,15 +19,18 @@ export default function ContactModal({ open, onClose }: Props) {
   const [status, setStatus] = useState<Status>("idle");
   const [errorMsg, setErrorMsg] = useState("");
   const honeypotRef = useRef<HTMLInputElement>(null);
+  // Portal needs document.body — only available client-side
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => { setMounted(true); }, []);
 
   // Close on Escape
   useEffect(() => {
-    const handler = (e: KeyboardEvent) => {
-      if (e.key === "Escape") onClose();
-    };
+    if (!open) return;
+    const handler = (e: KeyboardEvent) => { if (e.key === "Escape") onClose(); };
     window.addEventListener("keydown", handler);
     return () => window.removeEventListener("keydown", handler);
-  }, [onClose]);
+  }, [open, onClose]);
 
   // Lock body scroll when open
   useEffect(() => {
@@ -35,11 +39,8 @@ export default function ContactModal({ open, onClose }: Props) {
   }, [open]);
 
   const reset = () => {
-    setName("");
-    setEmail("");
-    setMessage("");
-    setStatus("idle");
-    setErrorMsg("");
+    setName(""); setEmail(""); setMessage("");
+    setStatus("idle"); setErrorMsg("");
   };
 
   const handleClose = () => {
@@ -60,17 +61,13 @@ export default function ContactModal({ open, onClose }: Props) {
         headers: { "Content-Type": "application/json", Accept: "application/json" },
         body: JSON.stringify({
           access_key: process.env.NEXT_PUBLIC_WEB3FORMS_KEY ?? "YOUR_ACCESS_KEY",
-          name,
-          email,
-          message,
+          name, email, message,
           subject: `[Pixelin] Pesan baru dari ${name}`,
           from_name: "Pixelin Contact Form",
           botcheck: "",
         }),
       });
-
       const data = await res.json();
-
       if (data.success) {
         setStatus("success");
       } else {
@@ -82,22 +79,28 @@ export default function ContactModal({ open, onClose }: Props) {
     }
   };
 
-  return (
+  // Render nothing until client-side (portal requires document.body)
+  if (!mounted) return null;
+
+  return createPortal(
     <AnimatePresence>
-      {open && <ModalInner
-        name={name} setName={setName}
-        email={email} setEmail={setEmail}
-        message={message} setMessage={setMessage}
-        status={status} errorMsg={errorMsg}
-        honeypotRef={honeypotRef}
-        onClose={handleClose} onSubmit={handleSubmit}
-      />}
-    </AnimatePresence>
+      {open && (
+        <ModalInner
+          name={name} setName={setName}
+          email={email} setEmail={setEmail}
+          message={message} setMessage={setMessage}
+          status={status} errorMsg={errorMsg}
+          honeypotRef={honeypotRef}
+          onClose={handleClose} onSubmit={handleSubmit}
+        />
+      )}
+    </AnimatePresence>,
+    document.body
   );
 }
 
-// Separate component so it fully unmounts/remounts on each open —
-// this resets backdropEnabled to false on every open, preventing ghost taps.
+// Separate component — fully unmounts/remounts on each open via AnimatePresence.
+// This resets backdropEnabled to false every time, blocking iOS ghost taps.
 function ModalInner({
   name, setName, email, setEmail, message, setMessage,
   status, errorMsg, honeypotRef, onClose, onSubmit,
@@ -110,29 +113,24 @@ function ModalInner({
   onClose: () => void;
   onSubmit: (e: { preventDefault(): void }) => void;
 }) {
-  // Starts false on every mount — backdrop is inert for 450ms to block iOS ghost taps.
   const [backdropEnabled, setBackdropEnabled] = useState(false);
 
   useEffect(() => {
-    // No auto-focus — on iOS Safari, focus() triggers keyboard which shrinks the
-    // viewport and shifts position:fixed elements, making the modal appear to vanish.
     const t = setTimeout(() => setBackdropEnabled(true), 450);
     return () => clearTimeout(t);
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
-    // Single element = backdrop + centering container.
-    // onClick only fires when backdropEnabled — safe against ghost taps.
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.2 }}
-      className="fixed inset-0 z-50 bg-black/75 flex items-center justify-center p-4"
+      // z-[9999] ensures it's above everything regardless of stacking context
+      className="fixed inset-0 z-[9999] bg-black/75 flex items-center justify-center p-4"
       onClick={backdropEnabled ? onClose : undefined}
       aria-hidden="true"
     >
-      {/* Modal panel — child of the wrapper, so stopPropagation actually works */}
       <motion.div
         initial={{ opacity: 0, y: 16 }}
         animate={{ opacity: 1, y: 0 }}
